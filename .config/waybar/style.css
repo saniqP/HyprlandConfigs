@@ -1,0 +1,146 @@
+@import "mocha.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: transparent;
+  border-radius: 12px;
+  padding: 0 12px;
+  margin: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background-color: #2d3741;  /* Серо-голубой */
+  border-radius: 8px;
+  padding: 0 12px;
+  margin: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+
+
+/* Рабочие пространства */
+#workspaces button {
+color: @gray;
+}
+
+#workspaces button.active {
+color: @light-blue;
+background: @base;
+}
+
+#workspaces button.urgent {
+color: @gray;
+}
+
+#window {
+color: @subtext;
+}
+
+/* Модули */
+#clock {
+color: @text;
+}
+
+#cpu {
+color: @light-blue;
+}
+
+#memory {
+color: @blue;
+}
+
+#temperature {
+color: @gray;
+}
+
+#battery {
+color: @text;
+}
+
+#network {
+color: @light-blue;
+}
+
+#pulseaudio {
+color: @blue;
+}
+
+#custom-random-fact {
+color: @light-blue;
+font-style: italic;
+}
+
+#custom-wfi {
+color: @blue;
+padding: 0 9px;
+}
+
+#custom-youtube {
+font-weight: bold;
+color: @orange;
+padding: 0 8px;
+}
+
+#custom-telegram {
+color: @blue;
+font-style: italic;
+}
+
+/* Иконки */
+#clock,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#network,
+#pulseaudio,
+#custom-random-fact {
+padding: 0 8px;
+}
+
+/* Индикатор батареи */
+#battery.charging {
+color: @light-blue;
+}
+
+#battery.warning:not(.charging) {
+color: @blue;
+}
+
+#battery.critical:not(.charging) {
+color: #ff0000;
+animation-name: blink;
+animation-duration: 0.5s;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+animation-direction: alternate;
+}
+
+@keyframes blink {
+  to {
+    background-color: @mantle;
+    color: @text;
+  }
+}
+
+/* Стиль для Tray */
+#tray {
+padding: 0 8px;
+}
+
+#tray > .passive {
+-gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+-gtk-icon-effect: highlight;
+background-color: @orange;
+}

@@ -1,0 +1,13 @@
+/* Цветовая палитра */
+@define-color base #1e293b;       /* Тёмный серо-голубой */
+@define-color mantle #334155;     /* Средний серо-голубой */
+@define-color crust #475569;      /* Светлый серо-голубой */
+
+@define-color text #ffffff;       /* Белый */
+@define-color subtext #e2e8f0;    /* Светло-серый */
+
+/* Акцентные цвета */
+@define-color blue #BAD0F7;       /* Голубой */
+@define-color light-blue #93c5fd; /* Светло-голубой */
+@define-color gray #8A8A8A;       /* Серый */
+
