@@ -1,0 +1,106 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin-top": 5,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 4,
+  "modules-left": [
+    "custom/wfi",
+    "hyprland/workspaces",
+    "custom/random-fact",
+    "custom/telegram"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "custom/youtube",
+    "pulseaudio",
+    "network",
+    "cpu",
+    "memory",
+    "temperature",
+    "battery",
+    "clock",
+    "custom/poweroff"
+  ],
+  "hyprland/window": {
+    "format": "  {}",
+    "max-length": 50,
+    "separate-outputs": true,
+    "on-click": "wofi"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "active": "",
+      "urgent": ""
+    },
+    "persistent-workspaces": {
+      "*": 6
+    }
+  },
+  "custom/random-fact": {
+    "exec": "~/.config/waybar/scripts/randNum",
+    "return-type": "text",
+    "format": "  {}",
+    "interval": 0
+  },
+  "custom/youtube": {
+    "exec": "echo 'youtube'",
+    "return-type": "text",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/open_sites --youtube",
+    "on-click-middle": "",
+    "on-click-right": ""
+  },
+  "custom/telegram": {
+    "exec": "echo 'telegram'",
+    "return-type": "text",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/open_sites --telegram",
+    "on-click-middle": "",
+    "on-click-right": ""
+  },
+  "custom/wfi": {
+    "exec": "echo ''",
+    "return-type": "text",
+    "format": "{}",
+    "on-click": "rofi -show drun",
+    "on-click-middle": "",
+    "on-click-right": ""
+  },
+  "clock": {
+    "format": "  {:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "  {:%d.%m.%Y}"
+  },
+  "cpu": {
+    "format": "  {usage}%",
+    "interval": 5
+  },
+  "temperature": {
+    "format": "  {temperatureC}°C",
+    "critical-threshold": 80
+  },
+  "battery": {
+    "format": "{icon}  {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "format-charging": "  {capacity}%",
+    "format-full": "  Full"
+  },
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "  {ipaddr}",
+    "format-disconnected": "  Disconnected"
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-icons": ["", "", ""],
+    "format-muted": "  Muted"
+  },
+
+}
