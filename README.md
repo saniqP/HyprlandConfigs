@@ -1,6 +1,6 @@
 # HyprlandConfigs
-Russian Instruction:
-#Установка
+##Russian Instruction:
+Установка:
 ```bash
 sudo pacman -S kitty hyprland waybar
 git clone https://aur.archlinux.org/yay.git
