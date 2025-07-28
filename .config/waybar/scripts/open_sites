@@ -1,0 +1,89 @@
+#!~/.config/waybar/scripts/env/bin/python
+import webbrowser
+import argparse
+import pygame as py
+import gif_pygame
+import os
+
+window_width = 350
+window_height = 500
+
+class Site:
+    def __init__(self, site, color, x, y, text):
+        self.site = site
+        self.color = color
+        self.text = text
+        self.x = x
+        self.y = y
+        self.rect = py.Rect(self.x, self.y, 220, 45)
+        
+sites = {
+    'youtube': Site(site='https://www.youtube.com/', color=(155, 60, 60), text='', x=65, y=50),
+    'distrochooser': Site(site='https://distrochooser.de/ru', color=(201, 125, 68), text='', x=65, y=100),
+    'github': Site(site='https://github.com/', color=(87, 87, 87), text='', x=65, y=150),
+    'wallpapers': Site(site='https://www.wallpaperflare.com/', color=(255, 98, 52), text='\uebd2', x=65, y=200),
+    'reddit': Site(site='https://www.reddit.com/r/unixporn/', color=(233, 131, 84), text='', x=65, y=250),
+    'telegram': Site(site='https://web.telegram.org/k/', color=(83, 137, 198), text='', x=65, y=300),
+}
+
+def gui():
+    py.init()
+
+    screen_info = py.display.Info()
+    screen_width = screen_info.current_w
+    screen_height = screen_info.current_h
+
+    font = py.font.Font('/usr/share/fonts/TTF/SymbolsNerdFont-Regular.ttf', 25)
+    def_font = py.font.Font(None, 25)
+
+    window_x = screen_width - window_width - 20
+    window_y = (screen_height - window_height) // 2
+
+    os.environ['SDL_VIDEO_WINDOW_POS'] = f'{window_x},{window_y}'
+
+    display = py.display.set_mode((window_width, window_height), py.SRCALPHA)
+    py.display.set_caption('siteOpenner')
+
+    run = True
+    butons = 1
+
+    while run:
+        display.fill((32, 32, 32, 255))
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                run = False
+            if event.type == py.MOUSEBUTTONDOWN:
+                for key, site in sites.items():
+                    if site.rect.collidepoint(py.mouse.get_pos()):
+                        webbrowser.open_new_tab(site.site)
+                        run = False
+                        break
+    
+        for key, site in sites.items():
+            py.draw.rect(display, site.color, site.rect)
+            display.blit(font.render(site.text, True, (255, 255, 255)), (site.x+38, site.y+8))
+            display.blit(def_font.render(key, True, (255, 255, 255)), (site.x+68, site.y+12))
+
+        py.display.update()
+
+    
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--gui', action='store_true', help='open gui version')
+
+    for key, site in sites.items():
+        parser.add_argument(f'--{key}', action='store_true', help=f'open {site.site}')
+    #parser.add_argument('--youtube', action='store_true', help='open youtube')
+    #parser.add_argument('--distr', action='store_true', help='open distrochooser')
+    #parser.add_argument('--github', action='store_true', help='open github')
+
+    args = parser.parse_args()
+    if args.gui:
+        gui()
+    else:
+        passed_args = [arg for arg in vars(args) if getattr(args, arg)]
+        webbrowser.open(sites[passed_args[0]].site)
+
+
